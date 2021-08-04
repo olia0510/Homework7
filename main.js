@@ -12,86 +12,40 @@
 // Пообідати - 1с
 
 
-    setTimeout(()=> {
-        console.log('I wake up');
-    }, 1000);
 
 
-    setTimeout(()=> {
-        console.log('Go to the shower')
-    },1200)
 
-    setTimeout(()=> {
-        console.log('Eat my breakfast')
-    }, 1500);
 
 function goToShop(money) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             console.log('Hallo. What you want');
 
-            if (money < 100) {
+            if (money < 200) {
                 console.log('yogurt');
                 reject('strawberry');
             } else {
                 console.log('Hamburger');
                 resolve('Take please');
             }
-        }, 1700)
+        }, 1000)
     });
 }
-goToShop(200, (err, wantToShop) => {
-    if (err) {
-        console.error(err);
-    } else {
-        console.log(wantToShop);
-    }
-});
-// function goToShop(money, cb) {
-//     setTimeout(()=> {
-//         console.log('Hallo. What you want');
-//         if (money < 100) {
-//             console.log('yogurt');
-//             cb('strawberry', null);
-//         } else {
-//             console.log('Hamburger');
-//             cb(null, 'Take please');
-//         }
-//     }, 1800)
-// }
-//
-// goToShop(200, (err, wantToShop) => {
-//     if (err) {
-//         console.error(err);
-//     } else {
-//         console.log(wantToShop);
-//     }
-// });
 
-function goToPark(a) {
-    setTimeout(()=> {
-        console.log('I go to the park');
-        if (a == 'rain') {
-            console.log('Where is my umbrella');
-        } else {
-            console.log('Fine weather');
-        }
-    }, 2000)
+function prepareToShop() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('Thanks');
+            resolve('good day');
+        }, 500)
+    });
 }
 
-goToPark('good weather', (err, wantToPark) => {
-    if (err) {
-        console.error(err);
-    } else {
-        console.log(wantToPark);
-    }
-});
 
-setTimeout(()=> {
-    console.log('Im having dinner with my hamburger')
-},2100)
+goToShop(200)
+    .then((value) => {
+        console.log('Good choice');
+        console.log(value)
 
-setTimeout(()=> {
-    console.log('Going to bed')
-},2500)
-
+        return prepareToShop();
+    })
